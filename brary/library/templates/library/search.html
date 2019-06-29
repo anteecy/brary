@@ -1,0 +1,18 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'library/search.css' %}">
+
+<h2 id='search-title'>Search for a book</h2>
+
+<form action ="{% url 'library:results' %}" method="post" id="search">
+{% csrf_token %}
+	<!-- Dropdown selection for search method -->
+	<select name="search-type">
+		<option value="author">By Author</option>
+		<option value="title">By Title</option>
+	</select>
+
+	<input name="search" type="text" placeholder="Search ...">
+	<input type="submit" value="Submit">
+
+</form>
