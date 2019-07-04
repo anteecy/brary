@@ -1,0 +1,14 @@
+img {
+	max-height: 150px;
+	max-height: 200px;
+    padding-top: 1px;
+}
+
+td {
+	padding: 25px;
+}
+
+.book-info {
+	position: relative;
+	top: -25px;
+}
