@@ -1,0 +1,9 @@
+#nav-menu ul {
+    overflow: hidden;
+}
+
+#nav-menu li {
+    display: inline-block;
+    padding-right: 20px;
+}
+
