@@ -1,7 +1,7 @@
 img {
 	max-height: 150px;
 	max-height: 200px;
-    padding-top: 1px;
+	padding-top: 1px;
 }
 
 td {
@@ -11,4 +11,15 @@ td {
 .book-info {
 	position: relative;
 	top: -25px;
+}
+
+span {
+	padding-left: 15px;
+}
+
+span a {
+	outline: none;
+	border: none;
+	text-decoration: none;
+	color: green;
 }

@@ -15,5 +15,8 @@ class Book(models.Model):
     book_publish_date = models.DateTimeField('date published')
     book_img = models.CharField(max_length=500, default="")
 
+    book_count = models.SmallIntegerField(default=1)
+    books_checked_out = models.SmallIntegerField(default=0)
+
     def __str__(self):
         return self.book_title

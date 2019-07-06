@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from .models import Book, Author
@@ -39,3 +39,7 @@ def search(request):
         #TODO: Make this all in the search page??
         return HttpResponseRedirect(reverse('library:results'))
 
+def book_request(request, book_id):
+    book = get_object_or_404(Book, pk=book_id)
+    context = {"book": book }
+    return render(request, 'library/request.html', context)
