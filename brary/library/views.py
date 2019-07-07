@@ -23,11 +23,11 @@ def results(request):
         books = Book.objects.filter(book_title=query)
 
     context = {"books": books, "query": query}
-    return render(request, 'library/results.html', context)
+    return render(request, 'library/search.html', context)
 
 
 def search(request):
-    context = dict()
+    context = {"books": None}
     try:
         search_type = request.POST['search-type']
         query = request.POST['search']
@@ -36,8 +36,8 @@ def search(request):
         return render(request, 'library/search.html', context)
     else:
         # Something was entered so go to results page
-        #TODO: Make this all in the search page??
         return HttpResponseRedirect(reverse('library:results'))
+
 
 def book_request(request, book_id):
     book = get_object_or_404(Book, pk=book_id)
