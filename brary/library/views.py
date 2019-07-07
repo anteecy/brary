@@ -22,12 +22,12 @@ def results(request):
     else: #search_type == "title":
         books = Book.objects.filter(book_title=query)
 
-    context = {"books": books, "query": query}
+    context = {"books": books, "query": query, "form_submitted": request.POST}
     return render(request, 'library/search.html', context)
 
 
 def search(request):
-    context = {"books": None}
+    context = {"books": None, "form_submitted": request.POST}
     try:
         search_type = request.POST['search-type']
         query = request.POST['search']
