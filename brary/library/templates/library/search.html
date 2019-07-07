@@ -1,6 +1,7 @@
 {% load static %}
 
 <link rel="stylesheet" type="text/css" href="{% static 'library/search.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'library/results.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'library/nav.css' %}">
 
 <div id="nav-menu">
@@ -24,3 +25,26 @@
 	<input type="submit" value="Submit">
 
 </form>
+
+{% if books %}
+
+<h4>{{ books|length }} result{{ books|length|pluralize }} for "{{ query }}"</h4>
+
+<table>
+{% for book in books %}
+    <tr>
+        <td><img src="{{ book.book_img }}" /></td>
+
+        <td class="book-info"><strong>{{ book.book_title }}</strong>
+        {% if book.book_count > book.books_checked_out %}
+            <span><a href="request/{{ book.id }}/">Available</a></span>
+        {% endif %}
+
+        <p>{{ book.author }} - {{ book.book_publish_date|date:'Y' }}</p>
+        <p>{{ book.book_descr }}</p></td>
+
+    </tr>
+{% endfor %}
+</table>
+
+{% endif %}
