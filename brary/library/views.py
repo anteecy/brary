@@ -41,6 +41,7 @@ def search(request):
 
 
 def book_request(request, book_id):
+    # TODO: Create feature so books may be placed on hold
     book = get_object_or_404(Book, pk=book_id)
     context = {"book": book }
     return render(request, 'library/request.html', context)

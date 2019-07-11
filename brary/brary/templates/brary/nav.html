@@ -18,16 +18,12 @@
 
 	{% if user.is_authenticated %}
 	<li><a href="/accounts/logout">Logout</a></li>
+
+	{# TODO: Implement a drop-down with user profile acccess #}
+	<span id="profile-dropdown">{{ user.get_username }}</span>
 	{% endif %}
 
     </ul>
 
-
-{# User profile information #}
-
-{# TODO: Implement a drop-down with user profile acccess #}
-{% if user.is_authenticated %}
-<p id="greeting">{{ user.get_username }}</p>
-{% endif %}
-
 </div>
+
