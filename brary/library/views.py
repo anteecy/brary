@@ -27,7 +27,7 @@ def results(request):
 
 
 def search(request):
-    context = {"books": None, "form_submitted": request.POST}
+    context = {"form_submitted": request.POST}
     try:
         search_type = request.POST['search-type']
         query = request.POST['search']
@@ -36,6 +36,7 @@ def search(request):
         return render(request, 'library/search.html', context)
     else:
         # Something was entered so go to results page
+        # TODO: Make it save search type after redirect??
         return HttpResponseRedirect(reverse('library:results'))
 
 

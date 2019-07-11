@@ -6,6 +6,28 @@
     <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/library/search">Search</a></li>
-    </ul>
-</div>
 
+	{# Nav elements when not logged in #}
+
+	{% if not user.is_authenticated %}
+        <li><a href="/register">Register</a></li>
+        <li><a href="/accounts/login">Login</a></li>
+	{% endif %}
+
+	{# Nav elements when logged in #}
+
+	{% if user.is_authenticated %}
+	<li><a href="/accounts/logout">Logout</a></li>
+	{% endif %}
+
+    </ul>
+
+
+{# User profile information #}
+
+{# TODO: Implement a drop-down with user profile acccess #}
+{% if user.is_authenticated %}
+<p id="greeting">{{ user.get_username }}</p>
+{% endif %}
+
+</div>
