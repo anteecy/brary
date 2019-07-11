@@ -1,0 +1,18 @@
+{% include "brary/nav.html" %}
+
+
+{% block body %}
+
+{% if user.is_authenticated %}
+<p>You must log out in order to create an account</p>
+<p><a href="/accounts/logout">Logout</a></p>
+{% else %}
+<div class="form-container">
+	<form method="post">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<button type="submit">Register</button>
+	</form>
+</div>
+{% endif %}
+{% endblock %}
