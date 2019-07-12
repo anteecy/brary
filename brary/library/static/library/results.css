@@ -17,6 +17,13 @@ span {
 	padding-left: 15px;
 }
 
+.available {
+	color: green;
+}
+
+.unavailable {
+	color: red;
+}
 span a {
 	outline: none;
 	border: none;

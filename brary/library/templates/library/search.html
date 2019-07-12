@@ -30,7 +30,9 @@
 
         <td class="book-info"><strong>{{ book.book_title }}</strong>
         {% if book.book_count > book.books_checked_out %}
-            <span><a href="request/{{ book.id }}/">Available</a></span>
+            <span class="available"><a href="request/{{ book.id }}/">Available</a></span>
+	{% else %}
+	    <span class="unavailable">Unavailable</span>
         {% endif %}
 
         <p>{{ book.author }} - {{ book.book_publish_date|date:'Y' }}</p>
