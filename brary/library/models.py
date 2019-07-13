@@ -18,5 +18,7 @@ class Book(models.Model):
     book_count = models.SmallIntegerField(default=1)
     books_checked_out = models.SmallIntegerField(default=0)
 
+    book_requested = models.BooleanField(default=False)
+
     def __str__(self):
         return self.book_title

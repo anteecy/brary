@@ -1,11 +1,13 @@
 {% include 'brary/nav.html' %}
 
-{# If the book is available, show one screen where the user
-   may place it on hold for a period of time #}
+{% comment %} If the book is available, show one screen where the user
+   may place it on hold for a period of time
 
-{# If the book is not available, display that the user may
+ If the book is not available, display that the user may
    also place a request for the item and this will place the
    book on a special setting where while it is unavailable,
-   nobody may renew the book #}
+   nobody may renew the book 
+
+{% endcomment %}
 
 <h3>Request {{ book.book_title }}</h3>

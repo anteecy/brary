@@ -17,6 +17,12 @@ span {
 	padding-left: 15px;
 }
 
+span a {
+	outline: none;
+	border: none;
+	text-decoration: none;
+}
+
 .available {
 	color: green;
 }
@@ -24,9 +30,4 @@ span {
 .unavailable {
 	color: red;
 }
-span a {
-	outline: none;
-	border: none;
-	text-decoration: none;
-	color: green;
-}
+
