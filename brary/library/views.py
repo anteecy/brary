@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from .models import Book, Author
+from django.contrib.auth.models import User
+from django.contrib import messages
 
 # Create your views here.
 
@@ -47,4 +49,19 @@ def book_request(request, book_id):
     book = get_object_or_404(Book, pk=book_id)
     context = {"book": book }
     return render(request, 'library/request.html', context)
+
+
+def checkout(request):
+    context = dict()
+    try:
+        u = User.objects.get(pk=request.POST['user_id'])
+        book = Book.objects.get(pk=request.POST['book_id'])
+    except:
+        return render(request, 'library/checkout.html', context)
+    else:
+        book.books_checked_out += 1
+        book.save()
+        msg = "Successfully checked out " + book.book_title
+        messages.add_message(request, messages.SUCCESS, msg)
+        return HttpResponseRedirect(reverse('library:checkout'))
 

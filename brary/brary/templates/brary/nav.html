@@ -1,4 +1,5 @@
 {% load static %}
+{% load has_group %}
 
 <link rel="stylesheet" type="text/css" href="{% static 'brary/nav.css' %}">
 
@@ -10,17 +11,22 @@
 	{# Nav elements when not logged in #}
 
 	{% if not user.is_authenticated %}
-        <li><a href="/register">Register</a></li>
-        <li><a href="/accounts/login">Login</a></li>
+        	<li><a href="/register">Register</a></li>
+        	<li><a href="/accounts/login">Login</a></li>
 	{% endif %}
 
 	{# Nav elements when logged in #}
 
-	{% if user.is_authenticated %}
-	<li><a href="/accounts/logout">Logout</a></li>
 
-	{# TODO: Implement a drop-down with user profile acccess #}
-	<span id="profile-dropdown">{{ user.get_username }}</span>
+	{% if request.user|has_group:"Librarian" %}
+		<span><a href="/library/checkout">Checkout</a></span>
+	{% endif %}
+
+	{% if user.is_authenticated %}
+		<li><a href="/accounts/logout">Logout</a></li>
+
+		{# TODO: Implement a drop-down with user profile acccess #}
+		<span id="profile-dropdown">{{ user.get_username }}</span>
 	{% endif %}
 
     </ul>
