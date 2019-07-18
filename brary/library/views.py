@@ -45,3 +45,7 @@ def book_request(request, book_id):
     book = get_object_or_404(Book, pk=book_id)
     context = {"book": book }
     return render(request, 'library/request.html', context)
+
+
+def checkout(request):
+    return render(request, 'library/checkout.html', dict())
