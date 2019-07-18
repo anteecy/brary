@@ -1,3 +1,7 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'library/results.css' %}">
+
 {% include 'brary/nav.html' %}
 
 {% comment %} If the book is available, show one screen where the user
@@ -10,4 +14,14 @@
 
 {% endcomment %}
 
-<h3>Request {{ book.book_title }}</h3>
+{% if book.book_count > book.books_checked_out %}
+<p>{{ book.book_title }} is currently available! Would you like to place the book on hold?</p>
+{% else %}
+<p>{{ book.book_title }} is currently unavailable. Would you like to place a request on the book?</p>
+{% endif %}
+
+<form action="{% url 'library:book_request' book.id %}" method="post">
+{% csrf_token %}
+	<input type="submit" value="Yes"></input>
+</form>
+

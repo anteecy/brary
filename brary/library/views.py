@@ -39,9 +39,12 @@ def search(request):
         # TODO: Make it save search type after redirect??
         return HttpResponseRedirect(reverse('library:results'))
 
-
 def book_request(request, book_id):
     # TODO: Create feature so books may be placed on hold
+
+    # Do book renewals first???
+
     book = get_object_or_404(Book, pk=book_id)
     context = {"book": book }
     return render(request, 'library/request.html', context)
+
