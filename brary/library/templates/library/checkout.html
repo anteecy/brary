@@ -1,0 +1,21 @@
+{% load static %}
+
+{% include 'brary/nav.html' %}
+
+{% if messages %}
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+{% endif %}
+<h3>Check out a book?</h3>
+
+
+<form action="{% url 'library:checkout' %}" method="post">
+{% csrf_token %}
+
+	<input name="user_id" type="text" placeholder="User ID ...">
+	<input name="book_id" type="text" placeholder="Book ID ...">
+	<input type="submit" value="Checkout">
+
+</form>
+
