@@ -62,6 +62,7 @@ def checkout(request):
         book.books_checked_out += 1
         book.save()
         msg = "Successfully checked out " + book.book_title
+        msg += " for " + u.username
         messages.add_message(request, messages.SUCCESS, msg)
         return HttpResponseRedirect(reverse('library:checkout'))
 

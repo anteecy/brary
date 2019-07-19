@@ -18,7 +18,7 @@
 	{# Nav elements when logged in #}
 
 
-	{% if request.user|has_group:"Librarian" %}
+	{% if request.user|has_group:"librarian" %}
 		<span><a href="/library/checkout">Checkout</a></span>
 	{% endif %}
 
