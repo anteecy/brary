@@ -1,9 +1,17 @@
+{% load static %}
+
 {% include 'brary/nav.html' %}
+
+{% if messages %}
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+{% endif %}
 
 <h3>Return a book</h3>
 
 <form action="{% url 'library:returns' %}" method="post">
 {% csrf_token %}
-	<input type="text" name="book-id" placeholder="Book ID ...">
+	<input type="text" name="book_id" placeholder="Book ID ...">
 	<input type="submit" value="Return Book">
 </form>

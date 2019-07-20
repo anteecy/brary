@@ -56,17 +56,34 @@ def checkout(request):
         u = User.objects.get(pk=request.POST['user_id'])
         book = Book.objects.get(pk=request.POST['book_id'])
     except:
+        # FIXME
+        # Specify exception and add to context an error message
+        # Add a return at the bottom that is just the normal page!!
         return render(request, 'library/checkout.html', context)
     else:
-        book.book_available = False
-        book.book_owner = u
-        book.save()
-        msg = "Successfully checked out " + book.book_title
-        msg += " for " + u.username
-        messages.add_message(request, messages.SUCCESS, msg)
+        # Only if the book is available can it be checked out ...
+        if book.book_available == True:
+            book.book_available = False
+            book.book_owner = u
+            book.save()
+            msg = "Successfully checked out " + book.book_title
+            msg += " for " + u.username
+            messages.add_message(request, messages.SUCCESS, msg)
         return HttpResponseRedirect(reverse('library:checkout'))
 
 def returns(request):
     context = dict()
-    return render(request, 'library/returns.html', context)
+    try:
+        book = Book.objects.get(pk=request.POST['book_id'])
+        u = User.objects.get(pk=book.book_owner.id)
+    except:
+        return render(request, 'library/returns.html', context)
+    else:
+        msg = u.username + " returned " + book.book_title
+        messages.add_message(request, messages.SUCCESS, msg)
+        book.book_available = True
+        book.book_owner = None
+        book.save()
+        return HttpResponseRedirect(reverse('library:returns'))
+
 
