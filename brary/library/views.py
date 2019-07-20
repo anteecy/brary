@@ -22,7 +22,7 @@ def results(request):
         except:
             pass
     else: #search_type == "title":
-        books = Book.objects.filter(book_title=query)
+        books = Book.objects.filter(book_title__icontains=query)
 
     context = {"books": books, "query": query, "form_submitted": request.POST}
     return render(request, 'library/search.html', context)
