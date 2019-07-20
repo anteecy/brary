@@ -16,9 +16,7 @@ def results(request):
     #TODO: Find an efficient way to filter results based on user input
     if search_type == "author":
         try:
-            #author = Author.objects.get(author_last_name__iexact=query)
-            #books = Book.objects.filter(author=author)
-            books = Book.objects.filter(author__author_last_name__icontains=query)
+            books = Book.objects.filter(book_author__author_last_name__icontains=query)
         except:
             pass
     else: #search_type == "title":
@@ -59,7 +57,8 @@ def checkout(request):
     except:
         return render(request, 'library/checkout.html', context)
     else:
-        book.books_checked_out += 1
+        book.book_available = False
+        book.book_owner = u
         book.save()
         msg = "Successfully checked out " + book.book_title
         msg += " for " + u.username

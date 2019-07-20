@@ -14,7 +14,7 @@
 
 {% endcomment %}
 
-{% if book.book_count > book.books_checked_out %}
+{% if book.book_available %}
 <p>{{ book.book_title }} is currently available! Would you like to place the book on hold?</p>
 {% else %}
 <p>{{ book.book_title }} is currently unavailable. Would you like to place a request on the book?</p>
