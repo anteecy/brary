@@ -66,3 +66,7 @@ def checkout(request):
         messages.add_message(request, messages.SUCCESS, msg)
         return HttpResponseRedirect(reverse('library:checkout'))
 
+def returns(request):
+    context = dict()
+    return render(request, 'library/returns.html', context)
+
