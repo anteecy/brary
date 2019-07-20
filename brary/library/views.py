@@ -50,6 +50,7 @@ def book_request(request, book_id):
 
 
 def checkout(request):
+    # TODO: BARCODE SCANNER
     context = dict()
     try:
         u = User.objects.get(pk=request.POST['user_id'])
