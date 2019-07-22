@@ -2,6 +2,19 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'library/search.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'library/results.css' %}">
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+   var input = document.getElementById('search-type');
+   if (localStorage['search-type']) { // if job is set
+       input.value = localStorage['search-type']; // set the value
+   }
+   input.onchange = function () {
+        localStorage['search-type'] = this.value; // change localStorage on change
+    }
+});
+</script>
+
 {% include 'brary/nav.html' %}
 
 <h2 id='search-title'>Search for a book</h2>
@@ -9,7 +22,7 @@
 <form action ="{% url 'library:results' %}" method="post" id="search">
 {% csrf_token %}
 	<!-- Dropdown selection for search method -->
-	<select name="search-type">
+	<select name="search-type" id='search-type'>
 		<option value="author">By Author</option>
 		<option value="title">By Title</option>
 	</select>
