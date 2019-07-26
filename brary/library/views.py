@@ -36,7 +36,6 @@ def search(request):
         return render(request, 'library/search.html', context)
     else:
         # Something was entered so go to results page
-        # TODO: Make it save search type after redirect??
         return HttpResponseRedirect(reverse('library:results'))
 
 def book_request(request, book_id):
