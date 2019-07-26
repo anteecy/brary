@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
+from .forms import RegistrationForm
 
 def home(request):
     context = dict()
@@ -8,12 +9,12 @@ def home(request):
 
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = RegistrationForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('/')
     else:
-        form = UserCreationForm()
+        form = RegistrationForm()
         context = {"form": form}
         return render(request, 'brary/registration.html', context)
 
