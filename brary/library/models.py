@@ -12,6 +12,7 @@ class Author(models.Model):
 class Book(models.Model):
     book_author = models.ForeignKey(Author,on_delete=models.CASCADE)
     book_owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    book_requester = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name='book_requester')
     book_title = models.CharField(max_length=100)
     book_descr = models.CharField(max_length=2000)
     book_publish_date = models.DateTimeField('date published')

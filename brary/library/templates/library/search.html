@@ -42,11 +42,13 @@ document.addEventListener('DOMContentLoaded', function () {
         <td><img src="{{ book.book_img }}" /></td>
 
         <td class="book-info"><strong>{{ book.book_title }}</strong>
+
         {% if book.book_available %}
             <span><a class="available" href="request/{{ book.id }}/">Available</a></span>
-	{% else %}
-	    <span><a class="unavailable" href="request/{{ book.id }}/">Unavailable</a></span>
+	    {% else %}
+	        <span><a class="unavailable" href="request/{{ book.id }}/">Unavailable</a></span>
         {% endif %}
+
 
         <p>{{ book.book_author }} - {{ book.book_publish_date|date:'Y' }}</p>
         <p>{{ book.book_descr }}</p></td>

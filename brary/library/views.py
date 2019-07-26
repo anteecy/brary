@@ -4,6 +4,7 @@ from django.urls import reverse
 from .models import Book, Author
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -38,15 +39,22 @@ def search(request):
         # Something was entered so go to results page
         return HttpResponseRedirect(reverse('library:results'))
 
+@login_required
 def book_request(request, book_id):
-    # TODO: Create feature so books may be placed on hold
-
-    # Do book renewals first???
 
     book = get_object_or_404(Book, pk=book_id)
     context = {"book": book }
-    return render(request, 'library/request.html', context)
 
+    if request.POST:
+        # User wants to request a book
+        context['requested'] = True
+        book.book_requester = request.user
+        book.book_available = False
+        book.save()
+    else:
+        context['requested'] = False
+
+    return render(request, 'library/request.html', context)
 
 def checkout(request):
     # TODO: BARCODE SCANNER
@@ -64,9 +72,10 @@ def checkout(request):
 
     else:
         # Only if the book is available can it be checked out ...
-        if book.book_available == True:
+        if book.book_available == True or book.book_requester == u:
             book.book_available = False
             book.book_owner = u
+            book.book_requester = None
             book.save()
             msg = "Successfully checked out " + book.book_title
             msg += " for " + u.username
@@ -76,6 +85,7 @@ def checkout(request):
             msg = "Book is already checked out by " + book.book_owner.username
             messages.add_message(request, messages.ERROR, msg)
         return HttpResponseRedirect(reverse('library:checkout'))
+
 
 def returns(request):
     context = dict()
