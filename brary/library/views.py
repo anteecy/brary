@@ -5,6 +5,7 @@ from .models import Book, Author
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from datetime import datetime, timedelta
 
 # Create your views here.
 
@@ -76,9 +77,12 @@ def checkout(request):
             book.book_available = False
             book.book_owner = u
             book.book_requester = None
+            book.book_due_date = datetime.now() + timedelta(weeks=3)
             book.save()
             msg = "Successfully checked out " + book.book_title
             msg += " for " + u.username
+            msg += ". It is due on " + book.book_due_date.strftime("%a %B %-m") 
+            msg += " at " + book.book_due_date.strftime("%-I %p")
             messages.add_message(request, messages.SUCCESS, msg)
         else:
         # Book was not available
