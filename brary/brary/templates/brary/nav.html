@@ -13,11 +13,28 @@
 	{% if not user.is_authenticated %}
         	<li><a href="/register">Register</a></li>
         	<li><a href="/accounts/login">Login</a></li>
+
+    {% else %}
+        <div class="dropdown">
+            <button class="dropbtn">{{ user }}</button>
+            <div class="dropdown-content">
+                <a href="/profile">My Profile</a>
+                <a href="/accounts/logout">Logout</a>
+
+                {% if request.user|has_group:"librarian" %}
+                    <a href="/library/checkout">Checkout</a>
+                    <a href="/library/returns">Returns</a>
+                {% endif %}
+
+
+            </div>
+        </div>
 	{% endif %}
 
 	{# Nav elements when logged in #}
 
 
+    {% comment %}
 	{% if request.user|has_group:"librarian" %}
 		<span><a href="/library/checkout">Checkout</a></span>
 		<span><a href="/library/returns">Returns</a></span>
@@ -32,5 +49,6 @@
 
     </ul>
 
+    {% endcomment %}
 </div>
 
