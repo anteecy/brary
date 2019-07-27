@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from .forms import RegistrationForm
+from django.contrib.auth.decorators import login_required
 
 def home(request):
     context = dict()
@@ -18,3 +19,7 @@ def register(request):
         context = {"form": form}
         return render(request, 'brary/registration.html', context)
 
+@login_required
+def profile(request):
+    context = {"user": request.user}
+    return render(request, 'brary/profile.html', context)
