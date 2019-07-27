@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 # Create your models here.
 class Author(models.Model):
@@ -19,8 +20,14 @@ class Book(models.Model):
     # TODO: Look at img field
     book_img = models.CharField(max_length=500, default="")
 
+    book_due_date = models.DateTimeField(default=None, null=True)
 
     book_available = models.BooleanField(default=True)
 
     def __str__(self):
         return self.book_title
+
+    def is_overdue(self):
+        if self.book_due_date and timezone.now() > self.book_due_date:
+            return True
+        return False
