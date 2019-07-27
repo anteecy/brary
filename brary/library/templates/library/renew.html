@@ -1,0 +1,19 @@
+{% load static %}
+
+{% include 'brary/nav.html' %}
+
+{% if messages %}
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+{% endif %}
+
+<p>{{ error_msg }}</p>
+
+<h3>Renew a book</h3>
+
+<form action="{% url 'library:renew' %}" method="post">
+{% csrf_token %}
+	<input type="text" name="book_id" placeholder="Book ID ...">
+	<input type="submit" value="Renew Book">
+</form>

@@ -1,0 +1,16 @@
+{% load static %}
+
+{% include 'brary/nav.html' %}
+
+<ul>
+
+{% if books %}
+    {% for book in books %}
+        <li>{{ book.book_title }}</li>
+    {% endfor %}
+    </ul>
+
+{% else %}
+<p>You have no books checked out. <a href="/library/search">Search</a> our large library!</p>
+{% endif %}
+

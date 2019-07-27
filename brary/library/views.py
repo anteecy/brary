@@ -120,4 +120,46 @@ def returns(request):
         book.save()
         return HttpResponseRedirect(reverse('library:returns'))
 
+def renew(request):
+    context = dict()
+    try:
+        book = Book.objects.get(pk=request.POST['book_id'])
+        u = User.objects.get(pk=book.book_owner.id)
+    except ValueError:
+        # Must enter a book id 
+        context['error_msg'] = "Book ID must be a number"
+        return render(request, 'library/renew.html', context)
+    except AttributeError:
+        # Book has not been checked out and cannot be returned
+        context['error_msg'] = "Book was never checked out"
+        return render(request, 'library/renew.html', context)
+    except:
+        return render(request, 'library/renew.html', context)
+
+    else:
+
+        if book.book_requester:
+            # There is someone who has placed a request on the book so it cant
+            # be renewed ...
+            msg = "A hold has been placed on " + book.book_title + " and it " 
+            msg += "cannot be renewed."
+            messages.add_message(request, messages.ERROR, msg)
+        else:
+            # The book may be renewed
+            book.book_due_date = datetime.now() + timedelta(weeks=3)
+            book.save()
+            msg = u.username + " renewed " + book.book_title + ". "
+            msg += "it is now due on " + book.book_due_date.strftime("%a %B %-m")
+            msg += " at " + book.book_due_date.strftime("%-I %p")
+            messages.add_message(request, messages.SUCCESS, msg)
+
+        return HttpResponseRedirect(reverse('library:renew'))
+
+@login_required
+def my_books(request):
+    context = dict()
+    books = Book.objects.filter(book_owner=request.user)
+    context['books'] = books
+    return render(request, 'library/my_books.html', context)
+
 

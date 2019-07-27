@@ -20,35 +20,17 @@
             <div class="dropdown-content">
                 <a href="/profile">My Profile</a>
                 <a href="/accounts/logout">Logout</a>
+                <a href="/library/my_books">My Books</a>
 
                 {% if request.user|has_group:"librarian" %}
                     <a href="/library/checkout">Checkout</a>
                     <a href="/library/returns">Returns</a>
+                    <a href="/library/renew">Renewals</a>
                 {% endif %}
 
 
             </div>
         </div>
 	{% endif %}
-
-	{# Nav elements when logged in #}
-
-
-    {% comment %}
-	{% if request.user|has_group:"librarian" %}
-		<span><a href="/library/checkout">Checkout</a></span>
-		<span><a href="/library/returns">Returns</a></span>
-	{% endif %}
-
-	{% if user.is_authenticated %}
-		<li><a href="/accounts/logout">Logout</a></li>
-
-		{# TODO: Implement a drop-down with user profile acccess #}
-		<span id="profile-dropdown">{{ user.get_username }}</span>
-	{% endif %}
-
-    </ul>
-
-    {% endcomment %}
 </div>
 

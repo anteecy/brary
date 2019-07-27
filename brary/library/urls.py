@@ -8,4 +8,6 @@ urlpatterns = [
     path('results/request/<int:book_id>/', views.book_request, name='book_request'),
     path('checkout/', views.checkout, name='checkout'),
     path('returns/', views.returns, name='returns'),
+    path('renew/', views.renew, name='renew'),
+    path('my_books/', views.my_books, name='my_books'),
     ]
