@@ -2,15 +2,25 @@
 
 {% include 'brary/nav.html' %}
 
+<h2>My Books</h2>
 <ul>
-
 {% if books %}
     {% for book in books %}
         <li>{{ book.book_title }}</li>
     {% endfor %}
-    </ul>
-
 {% else %}
 <p>You have no books checked out. <a href="/library/search">Search</a> our large library!</p>
 {% endif %}
+</ul>
 
+
+<h2>My Holds</h2>
+<ul>
+    {% if holds %}
+        {% for hold in holds %}
+            <li>{{ hold.book_title }}</li>
+        {% endfor %}
+    {% else %}
+        <p>You have no books on hold.</p>
+    {% endif %}
+</ul>

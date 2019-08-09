@@ -1,27 +1,61 @@
-"""#nav-menu {
-	background-color: #bfbfbf;
-	position: relative;
-	height: 7%;
+/* START DESIGN SCHEME */
+
+body {
+    /*background-color: #f2f2f2;*/
+    background-color: #eaeaea;
+    color: #515151;
 }
 
-#nav-menu ul {
-	overflow: hidden;
-	position: absolute;
-	bottom: 0;
-}
+/* END DESIGN SCHEME */
 
+
+/* Navbar */
+
+
+/* Get navbar on one line */
 #nav-menu li {
-	display: inline-block;
-	padding-right: 25px;
-	font-size: 18px;
+    display: inline;
+    padding: 15px;
+    font-size: 16px;
 }
-"""
+
+/* Style links in navbar */
+
+#navbar {
+    background-color: #33363b;
+    padding: 16px;
+}
+
+#nav-menu li a {
+    text-decoration: none;
+    color: #e8e8e8;
+    font-family: "Georgia", serif;
+}
+
+#nav-menu li a:hover {
+    text-decoration: overline;
+}
+
+/* Create down arrow for dropdown menu */
+
+.down-arrow {
+    position: relative;
+    left: 10px;
+    border: solid #e8e8e8;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
 /* Dropdown Button */
 .dropbtn {
-  background-color: #4CAF50;
-  color: white;
-  padding: 16px;
+  background-color: #33363b;
+  font-family: "Georgia", serif;
   font-size: 16px;
+  color: #e8e8e8;
+  padding: inherit;
   border: none;
 }
 
@@ -54,7 +88,4 @@
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {display: block;}
-
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {background-color: #3e8e41;}
 

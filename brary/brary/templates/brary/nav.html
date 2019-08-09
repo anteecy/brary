@@ -3,34 +3,36 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'brary/nav.css' %}">
 
-<div id="nav-menu">
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/library/search">Search</a></li>
+<div id="navbar">
+    <ul id="nav-menu">
+        <li><a href="/">HOME</a></li>
+        <li><a href="/library/search">SEARCH</a></li>
 
 	{# Nav elements when not logged in #}
 
 	{% if not user.is_authenticated %}
-        	<li><a href="/register">Register</a></li>
-        	<li><a href="/accounts/login">Login</a></li>
 
-    {% else %}
-        <div class="dropdown">
-            <button class="dropbtn">{{ user }}</button>
-            <div class="dropdown-content">
-                <a href="/profile">My Profile</a>
-                <a href="/accounts/logout">Logout</a>
-                <a href="/library/my_books">My Books</a>
+        <li><a href="/register">REGISTER</a></li>
+        <li><a href="/accounts/login">LOGIN</a></li>
 
-                {% if request.user|has_group:"librarian" %}
-                    <a href="/library/checkout">Checkout</a>
-                    <a href="/library/returns">Returns</a>
-                    <a href="/library/renew">Renewals</a>
-                {% endif %}
+    {% endif %}
 
+    {% if user.is_authenticated %}
+    <div class="dropdown">
+        <button class="dropbtn">MY ACCOUNT<i class="down-arrow"></i></button>
+        <div class="dropdown-content">
+            <a href="/profile">My Profile</a>
+            <a href="/accounts/logout">Logout</a>
+            <a href="/library/my_books">My Books</a>
 
-            </div>
+            {% if request.user|has_group:"librarian" %}
+            <a href="/library/checkout">Checkout</a>
+            <a href="/library/returns">Returns</a>
+            <a href="/library/renew">Renewals</a>
+            {% endif %}
         </div>
+    </div>
 	{% endif %}
+    </ul>
 </div>
 

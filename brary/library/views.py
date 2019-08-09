@@ -86,7 +86,7 @@ def checkout(request):
             messages.add_message(request, messages.SUCCESS, msg)
         else:
         # Book was not available
-            msg = "Book is already checked out by " + book.book_owner.username
+            msg = str(book) + " is not available currently, however; you may request it!"
             messages.add_message(request, messages.ERROR, msg)
         return HttpResponseRedirect(reverse('library:checkout'))
 
@@ -141,7 +141,7 @@ def renew(request):
         if book.book_requester:
             # There is someone who has placed a request on the book so it cant
             # be renewed ...
-            msg = "A hold has been placed on " + book.book_title + " and it " 
+            msg = book.book_title + " is on hold, and it " 
             msg += "cannot be renewed."
             messages.add_message(request, messages.ERROR, msg)
         else:
@@ -159,7 +159,9 @@ def renew(request):
 def my_books(request):
     context = dict()
     books = Book.objects.filter(book_owner=request.user)
+    holds = Book.objects.filter(book_requester=request.user)
     context['books'] = books
+    context['holds'] = holds
     return render(request, 'library/my_books.html', context)
 
 
