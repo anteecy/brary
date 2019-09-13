@@ -1,5 +1,6 @@
 {% load static %}
 
+<link rel="stylesheet" type="text/css" href="{% static 'library/form.css' %}">
 {% include 'brary/nav.html' %}
 
 {% if messages %}
@@ -9,7 +10,7 @@
 {% endif %}
 
 <p>{{ error_msg }}</p>
-<h3>Check out a book?</h3>
+<h3 id="form-head">Check out a book?</h3>
 
 
 <form action="{% url 'library:checkout' %}" method="post">

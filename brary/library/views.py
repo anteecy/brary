@@ -4,8 +4,15 @@ from django.urls import reverse
 from .models import Book, Author
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from datetime import datetime, timedelta
+
+def librarian_check(user):
+    """
+    Checks to see if user is a librarian
+    """
+    return user.groups.filter(name='librarian').exists()
+
 
 # Create your views here.
 
@@ -51,12 +58,14 @@ def book_request(request, book_id):
         context['requested'] = True
         book.book_requester = request.user
         book.book_available = False
+        book.book_due_date = datetime.now() + timedelta(weeks=1)
         book.save()
     else:
         context['requested'] = False
 
     return render(request, 'library/request.html', context)
 
+@user_passes_test(librarian_check)
 def checkout(request):
     # TODO: BARCODE SCANNER
     context = dict()
@@ -91,6 +100,7 @@ def checkout(request):
         return HttpResponseRedirect(reverse('library:checkout'))
 
 
+@user_passes_test(librarian_check)
 def returns(request):
     context = dict()
     try:
@@ -120,6 +130,8 @@ def returns(request):
         book.save()
         return HttpResponseRedirect(reverse('library:returns'))
 
+
+@user_passes_test(librarian_check)
 def renew(request):
     context = dict()
     try:
@@ -165,3 +177,5 @@ def my_books(request):
     return render(request, 'library/my_books.html', context)
 
 
+def user_hold_cancel(request):
+    return HttpResonse("hello")

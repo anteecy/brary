@@ -1,5 +1,6 @@
 {% load static %}
 
+<link rel="stylesheet" type="text/css" href="{% static 'library/form.css' %}">
 {% include 'brary/nav.html' %}
 
 {% if messages %}
@@ -10,7 +11,7 @@
 
 <p>{{ error_msg }}</p>
 
-<h3>Renew a book</h3>
+<h3 id="form-head">Renew a book</h3>
 
 <form action="{% url 'library:renew' %}" method="post">
 {% csrf_token %}

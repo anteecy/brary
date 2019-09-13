@@ -1,0 +1,18 @@
+#accounts-form {
+    position: relative;
+    top: 150px;
+    width: 450px;
+    height: 250px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#accounts-form table {
+    margin-left: 75px;
+}
+
+#accounts-form td {
+    padding-top: 10px;
+}
+
+

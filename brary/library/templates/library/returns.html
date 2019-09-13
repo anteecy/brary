@@ -1,7 +1,8 @@
 {% load static %}
 
-{% include 'brary/nav.html' %}
+<link rel="stylesheet" type="text/css" href="{% static 'library/form.css' %}">
 
+{% include 'brary/nav.html' %}
 {% if messages %}
     {% for message in messages %}
         <p>{{ message }}</p>
@@ -10,7 +11,7 @@
 
 <p>{{ error_msg }}</p>
 
-<h3>Return a book</h3>
+<h3 id="form-head">Return a book</h3>
 
 <form action="{% url 'library:returns' %}" method="post">
 {% csrf_token %}

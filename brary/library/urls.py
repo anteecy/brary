@@ -10,4 +10,6 @@ urlpatterns = [
     path('returns/', views.returns, name='returns'),
     path('renew/', views.renew, name='renew'),
     path('my_books/', views.my_books, name='my_books'),
+    path('user/cancel/', views.user_hold_cancel, name="user_hold_cancel"),
+
     ]

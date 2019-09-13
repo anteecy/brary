@@ -1,26 +1,37 @@
 {% load static %}
 
+<link rel="stylesheet" type="text/css" href="{% static 'library/my_books.css' %}">
+
 {% include 'brary/nav.html' %}
 
 <h2>My Books</h2>
-<ul>
 {% if books %}
+    <table class="book-list">
     {% for book in books %}
-        <li>{{ book.book_title }}</li>
+        <tr>
+            <td>{{ book.book_title }}</td>
+            <td>Due {{ book.book_due_date }}</td>
+            <form class="renew"><td><a href="#"><button>Renew</button></a></td></form>
+        </tr>
     {% endfor %}
+    </table>
 {% else %}
 <p>You have no books checked out. <a href="/library/search">Search</a> our large library!</p>
 {% endif %}
-</ul>
 
 
 <h2>My Holds</h2>
-<ul>
     {% if holds %}
+        <table class="book-list">
         {% for hold in holds %}
-            <li>{{ hold.book_title }}</li>
+            <tr>
+                <td>{{ hold.book_title }}</td>
+                <form class+"hold-cancel"><td><a href="#"><button>Cancel Hold</button></a></td></form>
+            </tr>
         {% endfor %}
+        </table>
     {% else %}
         <p>You have no books on hold.</p>
     {% endif %}
 </ul>
+
